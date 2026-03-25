@@ -2,17 +2,22 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bot, Mail, Lock } from "lucide-react";
+import Image from "next/image";
 
 export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <Card className="w-full max-w-md bg-card border-border shadow-2xl">
-        <CardHeader className="space-y-1 items-center">
-          <div className="w-12 h-12 rounded bg-primary flex items-center justify-center mb-4">
-            <span className="font-bold text-primary-foreground text-2xl">P</span>
-          </div>
-          <CardTitle className="text-2xl font-bold tracking-tight text-foreground">
-            Masuk ke PANEN-AI
+        <CardHeader className="space-y-1 items-center pb-8">
+          <Image 
+            src="/tipografi.jpg"
+            alt="AGRI-KARTA"
+            width={200}
+            height={60}
+            className="h-12 w-auto object-contain dark:brightness-200 mb-2"
+          />
+          <CardTitle className="sr-only">
+            Masuk ke AGRI-KARTA
           </CardTitle>
           <CardDescription className="text-muted-foreground text-center">
             Masukkan email dan password untuk mengakses fitur premium

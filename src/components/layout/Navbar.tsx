@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { useState } from "react";
@@ -16,9 +17,14 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                PANEN-AI
-              </span>
+              <Image 
+                src="/tipografi.jpg"
+                alt="AGRI-KARTA Logo"
+                width={150}
+                height={40}
+                className="h-8 w-auto object-contain dark:brightness-200"
+                priority
+              />
             </Link>
 
             <div className="hidden md:flex items-center gap-4 text-sm font-medium">

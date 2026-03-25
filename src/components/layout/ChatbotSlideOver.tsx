@@ -42,7 +42,7 @@ export function ChatbotSlideOver() {
         <div className="flex-1 p-6 overflow-y-auto flex flex-col gap-4">
           <div className="bg-muted p-4 rounded-lg rounded-tl-none self-start max-w-[85%]">
             <p className="text-sm text-foreground">
-              Halo! Saya asisten AI PANEN. Ada yang bisa saya bantu terkait harga komoditas hari ini?
+              Halo! Saya asisten AI AGRI-KARTA. Ada yang bisa saya bantu terkait harga komoditas hari ini?
             </p>
           </div>
         </div>
