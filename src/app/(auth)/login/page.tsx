@@ -10,11 +10,12 @@ export default function LoginPage() {
       <Card className="w-full max-w-md bg-card border-border shadow-2xl">
         <CardHeader className="space-y-1 items-center pb-8">
           <Image 
-            src="/tipografi.jpg"
+            src="/tipografi.png"
             alt="AGRI-KARTA"
             width={200}
-            height={60}
-            className="h-12 w-auto object-contain dark:brightness-200 mb-2"
+            height={53}
+            className="h-12 w-auto object-contain mb-2"
+            priority
           />
           <CardTitle className="sr-only">
             Masuk ke AGRI-KARTA
@@ -27,22 +28,28 @@ export default function LoginPage() {
           <form className="space-y-4">
             <div className="space-y-2">
               <div className="relative">
+                <label htmlFor="email" className="sr-only">Email</label>
                 <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
+                  id="email"
                   type="email"
                   placeholder="name@example.com"
                   className="pl-9 bg-input border-border focus-visible:ring-primary"
+                  aria-label="Email Address"
                   required
                 />
               </div>
             </div>
             <div className="space-y-2">
               <div className="relative">
+                <label htmlFor="password" className="sr-only">Password</label>
                 <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
+                  id="password"
                   type="password"
                   placeholder="••••••••"
                   className="pl-9 bg-input border-border focus-visible:ring-primary"
+                  aria-label="Password"
                   required
                 />
               </div>
