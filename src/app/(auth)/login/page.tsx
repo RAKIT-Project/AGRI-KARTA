@@ -1,10 +1,51 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bot, Mail, Lock } from "lucide-react";
+import { Bot, Mail, Lock, Loader2, AlertCircle } from "lucide-react";
 import Image from "next/image";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const supabase = createClient();
+
+  const doLogin = async (loginEmail: string, loginPass: string) => {
+    setIsLoading(true);
+    setErrorMessage("");
+    
+    const { error } = await supabase.auth.signInWithPassword({
+      email: loginEmail,
+      password: loginPass,
+    });
+
+    if (error) {
+      setErrorMessage(error.message);
+      setIsLoading(false);
+    } else {
+      router.push("/dashboard");
+    }
+  };
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    doLogin(email, password);
+  };
+
+  const handleDummyLogin = () => {
+    setEmail("admin@agrikarta.com");
+    setPassword("admin123");
+    doLogin("admin@agrikarta.com", "admin123");
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <Card className="w-full max-w-md bg-card border-border shadow-2xl">
@@ -25,7 +66,15 @@ export default function LoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-4">
+            
+            {errorMessage && (
+              <div className="bg-destructive/15 text-destructive text-sm p-3 rounded-md flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>{errorMessage}</span>
+              </div>
+            )}
+
             <div className="space-y-2">
               <div className="relative">
                 <label htmlFor="email" className="sr-only">Email</label>
@@ -36,7 +85,10 @@ export default function LoginPage() {
                   placeholder="name@example.com"
                   className="pl-9 bg-input border-border focus-visible:ring-primary"
                   aria-label="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -50,12 +102,29 @@ export default function LoginPage() {
                   placeholder="••••••••"
                   className="pl-9 bg-input border-border focus-visible:ring-primary"
                   aria-label="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
+                  disabled={isLoading}
                 />
               </div>
             </div>
-            <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-              Masuk
+            <Button 
+              type="submit" 
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+              disabled={isLoading}
+            >
+              {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Masuk"}
+            </Button>
+            
+            <Button 
+              type="button" 
+              variant="outline" 
+              className="w-full border-primary text-primary hover:bg-primary/10"
+              onClick={handleDummyLogin}
+              disabled={isLoading}
+            >
+              Gunakan Akun Dummy
             </Button>
           </form>
           
