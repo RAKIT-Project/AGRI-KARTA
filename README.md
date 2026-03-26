@@ -1,51 +1,48 @@
-# AGRI-KARTA (Agro-Intelligence for Yogyakarta)
+# AGRI-KARTA
+Sistem Informasi Cerdas Pemantauan Harga Komoditas Pertanian dan Prediksi AI untuk wilayah Yogyakarta.
 
-AGRI-KARTA is an advanced "Agro-Intelligence" system explicitly designed for the Yogyakarta region. It provides real-time agricultural commodity price monitoring, comprehensive dashboards, early warning price alerts, and AI-driven predictive analytics to help farmers, policymakers, and markets stay ahead of economic trends.
+![Logo](public/tipografi.png)
 
-## 🚀 Key Features
-- **Real-time Price Monitoring**: Track up-to-date prices of crucial agricultural commodities across Yogyakarta.
-- **AI Price Prediction**: Machine learning insights providing a 7-day outlook for various staples (rice, chili, onion, chicken, eggs).
-- **Early Warning System**: Configurable price alerts notify registered users when commodity limits breach critical thresholds.
-- **AI Chatbot Assistant**: Ask questions and get interactive insights regarding today's prices via the integrated AI Chatbot.
+## Fitur Utama MVP
+- **Pemantauan Harga Real-time**: Memantau 6 komoditas utama pangan dan peternakan harian.
+- **Prediksi Harga AI**: Algoritma AI mensimulasikan dan memberikan prediksi tren harga untuk 7 hari ke depan.
+- **Visualisasi Dual-Line**: Chart memisahkan garis historis (hijau hutan solid) dan prediksi masa depan (kuning emas putus-putus).
+- **Notifikasi Price Alerts**: Pengguna terdaftar dapata menerima peringatan dini saat harga melewati ambang batas wajar.
+- **Manajemen Preferensi Preferensi**: UI khusus untuk mengatur channel notifikasi (Email / WhatsApp) dan pilihan komoditas.
 
-## 💻 Tech Stack
-- **Framework:** Next.js 16 (App Router, Turbopack)
-- **Styling:** Tailwind CSS v4 + Shadcn UI
-- **Database / Auth:** Supabase SSR
-- **PWA:** @ducanh2912/next-pwa
-- **Icons & Fonts:** Lucide React, Geist / Inter Fonts
+## Tech Stack
+- **Framework**: Next.js 15.3.3 (App Router)
+- **Styling**: Tailwind CSS v4, shadcn/ui
+- **Auth & Database**: Supabase SSR
+- **Charts**: Recharts
+- **PWA**: next-pwa
 
-## 🛠️ Prerequisites
-- Node.js (v18 or higher recommended)
-- npm, yarn, or pnpm
-- A Supabase account and a pre-configured Supabase project URL and Anon Key.
+## Cara Menjalankan Aplikasi
 
-## ⚙️ Installation & Setup
-
-1. **Clone the repository and install dependencies:**
-   ```bash
-   git clone [repository-url]
-   cd panen-ai
-   npm install
-   ```
-
-2. **Configure Environment Variables:**
-   Copy the example environment file and fill in your Supabase credentials:
+1. Clone repositori ini.
+2. Salin template environment variables:
    ```bash
    cp .env.example .env.local
    ```
-   *Make sure you set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.*
-
-3. **Start the Development Server:**
+   Isi konfigurasi `NEXT_PUBLIC_SUPABASE_URL` dan `NEXT_PUBLIC_SUPABASE_ANON_KEY` dengan milik proyek Supabase Anda.
+3. Install dependensi:
+   ```bash
+   npm install
+   ```
+4. Jalankan development server:
    ```bash
    npm run dev
    ```
-   Open [http://localhost:3000](http://localhost:3000) with your browser to explore AGRI-KARTA.
+5. Buka [http://localhost:3000](http://localhost:3000) di browser.
 
-4. **Building for Production:**
-   ```bash
-   npm run build
-   npm start
-   ```
+## Skema Warna & Identitas Visual
+Proyek ini menggunakan tema `light` default dengan identitas visual:
+- **Primary**: Hijau Hutan (`#166534`) untuk background logo, data historis, header komponen.
+- **Accent/Warning**: Kuning Emas (`#EAB308`) untuk garis prediksi, peringatan, ikon notifikasi.
+- **Background**: Slate-50 minimalis (`#F8FAFC`).
 
-*Note: This project relies on Next.js Turbopack by default for the `npm run dev` and `npm run build` scripts to prevent local compilation hanging issues.*
+## Struktur Proyek
+- `src/app/page.tsx` - Landing Page utama.
+- `src/app/(main)/dashboard/page.tsx` - Dashboard pemantauan komoditas.
+- `src/app/(protected)/kelola/page.tsx` - Form preferensi peringatan harga (Otentikasi required).
+- `src/lib/dummy-data.ts` - Sumber data JSON statis (30 hari riwayat, 7 hari prediksi) untuk demo tanpa membebani database utama.

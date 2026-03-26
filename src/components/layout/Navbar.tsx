@@ -18,11 +18,11 @@ export function Navbar() {
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <Image 
-                src="/tipografi.jpg"
+                src="/tipografi.png"
                 alt="AGRI-KARTA Logo"
                 width={150}
                 height={40}
-                className="h-8 w-auto object-contain dark:brightness-200"
+                className="h-8 w-auto object-contain"
                 priority
               />
             </Link>
@@ -33,6 +33,9 @@ export function Navbar() {
               </Link>
               <Link href="/alerts" className="text-muted-foreground hover:text-foreground transition-colors">
                 Price Alerts
+              </Link>
+              <Link href="/kelola" className="text-muted-foreground hover:text-foreground transition-colors">
+                Kelola
               </Link>
             </div>
           </div>
@@ -72,6 +75,13 @@ export function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Price Alerts
+            </Link>
+            <Link 
+              href="/kelola" 
+              className="px-2 py-1.5 text-foreground hover:bg-muted rounded-md"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Kelola
             </Link>
           </div>
           <div className="pt-2 border-t border-border">

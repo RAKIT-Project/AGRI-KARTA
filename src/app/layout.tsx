@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   description: "Agro-Intelligence for Yogyakarta",
   manifest: "/manifest.json",
   icons: {
-    icon: "/logo.jpg",
+    icon: "/logo.png",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B0914",
+  themeColor: "#166534",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -41,8 +41,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Navbar />
@@ -52,11 +52,12 @@ export default function RootLayout({
             </div>
             <footer className="mt-12 py-6 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
               <Image 
-                src="/tipografi.jpg"
+                src="/tipografi.png"
                 alt="AGRI-KARTA"
-                width={120}
-                height={32}
-                className="h-6 w-auto object-contain dark:brightness-200"
+                width={150}
+                height={40}
+                className="h-8 w-auto object-contain"
+                priority
               />
               <p className="text-sm text-muted-foreground text-center md:text-left">
                 &copy; {new Date().getFullYear()} AGRI-KARTA (Agro-Intelligence for Yogyakarta). All rights reserved.
