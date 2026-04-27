@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { Menu, UserCircle } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -36,6 +36,9 @@ export function Navbar() {
               </Link>
               <Link href="/kelola" className="text-muted-foreground hover:text-foreground transition-colors">
                 Kelola
+              </Link>
+              <Link href="/profile" className="text-muted-foreground hover:text-foreground transition-colors">
+                Profil
               </Link>
             </div>
           </div>
@@ -82,6 +85,14 @@ export function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Kelola
+            </Link>
+            <Link 
+              href="/profile" 
+              className="px-2 py-1.5 text-foreground hover:bg-muted rounded-md flex items-center gap-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <UserCircle className="w-4 h-4" />
+              Profil
             </Link>
           </div>
           <div className="pt-2 border-t border-border">
