@@ -34,21 +34,24 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // Protect the /alerts and /kelola routes
-  if (!user && (request.nextUrl.pathname.startsWith('/alerts') || request.nextUrl.pathname.startsWith('/kelola') || request.nextUrl.pathname.startsWith('/profile'))) {
-    // no user, potentially respond by redirecting the user to the login page
+  // Protected routes – redirect unauthenticated users to /login
+  const protectedPaths = ['/dashboard', '/alerts', '/kelola', '/profile']
+  const isProtected = protectedPaths.some((p) => request.nextUrl.pathname.startsWith(p))
+
+  if (!user && isProtected) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
   }
 
-  // Redirect authenticated users away from /login
+  // Redirect authenticated users away from /login to dashboard
   if (user && request.nextUrl.pathname.startsWith('/login')) {
     const url = request.nextUrl.clone()
-    url.pathname = '/alerts'
-    // If they tried to access /login directly but are authed, let's just push them to their preferences or alerts
+    url.pathname = '/dashboard'
     return NextResponse.redirect(url)
   }
 
+  // IMPORTANT: Always return supabaseResponse, not NextResponse.next().
+  // The supabaseResponse carries the updated cookies from setAll().
   return supabaseResponse
 }

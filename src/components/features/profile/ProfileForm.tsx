@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { updatePhoneNumber, type ActionResult } from "@/lib/actions";
+import { updatePhoneNumber, type ActionResult } from "@/actions/user.actions";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";

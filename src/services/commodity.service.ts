@@ -53,7 +53,7 @@ export async function fetchCommodities(): Promise<Commodity[]> {
   const { data: predictionRows, error: predError } = await supabase
     .from("price_predictions")
     .select("*")
-    .order("date", { ascending: true });
+    .order("target_date", { ascending: true });
 
   if (predError) {
     console.error("[fetchCommodities] price_predictions error:", predError.message);
@@ -193,7 +193,7 @@ function aggregateCommodities(
     for (const row of predictions) {
       const price = row.predicted_price ?? lastKnownPrice;
       if (row.predicted_price !== null) lastKnownPrice = row.predicted_price;
-      predicted.push({ date: row.date, price, isPredicted: true });
+      predicted.push({ date: row.target_date, price, isPredicted: true });
     }
 
     const currentPrice =

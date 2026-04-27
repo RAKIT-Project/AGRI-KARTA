@@ -1,6 +1,6 @@
 import { TrendingUp, TrendingDown } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Commodity } from "@/types";
+import type { Commodity } from "@/types";
 import { cn } from "@/lib/utils";
 
 export function CommodityCard({ 

@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
-import { DailyPrice } from "@/types";
+import type { DailyPrice } from "@/types";
 
 interface ChartDataPoint {
   date: string;

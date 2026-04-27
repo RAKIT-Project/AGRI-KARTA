@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Menu, UserCircle } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { ChatbotSlideOver } from "@/components/layout/ChatbotSlideOver";
 
 export function Navbar() {
