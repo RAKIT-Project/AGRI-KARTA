@@ -23,7 +23,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import Image from "next/image";
 
