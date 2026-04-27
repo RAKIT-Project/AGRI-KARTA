@@ -11,11 +11,10 @@ import logging
 from contextlib import asynccontextmanager
 from typing import AsyncIterator
 
+from config import get_settings
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-
-from config import get_settings
 from routers import cron, webhook
 
 # ── Logging ──────────────────────────────────────────────────────────────────
@@ -36,7 +35,7 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     logger.info("🚀 AGRI-KARTA backend starting...")
     logger.info("   Supabase URL : %s", settings.supabase_url[:40] + "...")
     logger.info("   Gemini API   : configured ✓")
-    logger.info("   WhatsApp API : configured ✓")
+    logger.info("   Wablas API   : configured ✓")
     yield
     # Shutdown
     logger.info("👋 AGRI-KARTA backend shutting down...")
@@ -60,7 +59,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",        # Next.js dev
+        "http://localhost:3000",  # Next.js dev
         "https://agri-karta.vercel.app",  # Production frontend
     ],
     allow_credentials=True,
