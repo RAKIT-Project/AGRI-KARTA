@@ -31,6 +31,7 @@ export default function LoginPage() {
       setErrorMessage(error.message);
       setIsLoading(false);
     } else {
+      router.refresh();
       router.push("/dashboard");
     }
   };
@@ -42,8 +43,8 @@ export default function LoginPage() {
 
   const handleDummyLogin = () => {
     setEmail("admin@agrikarta.com");
-    setPassword("admin123");
-    doLogin("admin@agrikarta.com", "admin123");
+    setPassword("agrikarta123");
+    doLogin("admin@agrikarta.com", "agrikarta123");
   };
 
   return (

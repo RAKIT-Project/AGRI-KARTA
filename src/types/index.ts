@@ -24,7 +24,7 @@ export interface PricePredictionRow {
   id: number;
   commodity_id: number;
   region_id?: number;
-  date: string;
+  target_date: string;
   predicted_price: number | null;
 }
 
