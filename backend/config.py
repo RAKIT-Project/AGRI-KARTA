@@ -22,10 +22,13 @@ class Settings:
     supabase_url: str
     supabase_service_key: str
 
-    # ── Meta WhatsApp Business API ──────────────────
-    wa_verify_token: str
-    wa_access_token: str
-    wa_phone_number_id: str
+    # ── Wablas WhatsApp API ─────────────────────────
+    # wablas_domain: e.g. "https://solo.wablas.com"
+    # wablas_dry_run: when True, messages are only logged – no HTTP request
+    #                 is made. Defaults to True to protect the 10-message quota.
+    wablas_token: str
+    wablas_domain: str
+    wablas_dry_run: bool
 
     # ── Google Gemini ───────────────────────────────
     gemini_api_key: str
@@ -42,18 +45,40 @@ def _require_env(key: str) -> str:
     return value
 
 
+def _parse_bool(value: str | None, default: bool) -> bool:
+    """
+    Parse a string env var into a boolean.
+
+    Truthy strings: "true", "1", "yes" (case-insensitive).
+    If the env var is absent, ``default`` is returned.
+    """
+    if value is None:
+        return default
+    return value.strip().lower() in ("true", "1", "yes")
+
+
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:
     """
     Singleton factory – called once, cached forever.
-    Used as a FastAPI dependency via `Depends(get_settings)`.
+    Used as a FastAPI dependency via ``Depends(get_settings)``.
+
+    Required environment variables:
+        SUPABASE_URL, SUPABASE_SERVICE_KEY   – Supabase project credentials.
+        WABLAS_TOKEN, WABLAS_DOMAIN          – Wablas API credentials.
+        GEMINI_API_KEY                       – Google Gemini API key.
+        CRON_SECRET                          – Bearer token for cron endpoints.
+
+    Optional environment variables:
+        WABLAS_DRY_RUN   – Set to "false" to enable live WhatsApp delivery.
+                           Defaults to "true" (safe default, no HTTP requests).
     """
     return Settings(
         supabase_url=_require_env("SUPABASE_URL"),
         supabase_service_key=_require_env("SUPABASE_SERVICE_KEY"),
-        wa_verify_token=_require_env("WA_VERIFY_TOKEN"),
-        wa_access_token=_require_env("WA_ACCESS_TOKEN"),
-        wa_phone_number_id=_require_env("WA_PHONE_NUMBER_ID"),
+        wablas_token=_require_env("WABLAS_TOKEN"),
+        wablas_domain=_require_env("WABLAS_DOMAIN"),
+        wablas_dry_run=_parse_bool(os.getenv("WABLAS_DRY_RUN"), default=True),
         gemini_api_key=_require_env("GEMINI_API_KEY"),
         cron_secret=_require_env("CRON_SECRET"),
     )
