@@ -35,7 +35,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   // Protect the /alerts and /kelola routes
-  if (!user && (request.nextUrl.pathname.startsWith('/alerts') || request.nextUrl.pathname.startsWith('/kelola'))) {
+  if (!user && (request.nextUrl.pathname.startsWith('/alerts') || request.nextUrl.pathname.startsWith('/kelola') || request.nextUrl.pathname.startsWith('/profile'))) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone()
     url.pathname = '/login'
