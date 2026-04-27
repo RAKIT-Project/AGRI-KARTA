@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Commodity } from "@/types";
+import type { Commodity } from "@/types";
 import { CommodityCard } from "./CommodityCard";
 import { PriceChart } from "./PriceChart";
 import { PackageSearch } from "lucide-react";

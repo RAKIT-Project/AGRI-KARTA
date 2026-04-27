@@ -1,6 +1,6 @@
-import { fetchUserProfile } from "@/lib/data-fetching";
-import { ProfileForm } from "@/components/profile/ProfileForm";
-import { WhatsAppStatus } from "@/components/profile/WhatsAppStatus";
+import { fetchUserProfile } from "@/services/commodity.service";
+import { ProfileForm } from "@/components/features/profile/ProfileForm";
+import { WhatsAppStatus } from "@/components/features/profile/WhatsAppStatus";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { UserCog, ShieldCheck } from "lucide-react";
 import { redirect } from "next/navigation";
