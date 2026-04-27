@@ -4,9 +4,24 @@ import { useState } from "react";
 import { Commodity } from "@/types";
 import { CommodityCard } from "./CommodityCard";
 import { PriceChart } from "./PriceChart";
+import { PackageSearch } from "lucide-react";
 
 export function CommodityGrid({ commodities }: { commodities: Commodity[] }) {
   const [selectedCommodity, setSelectedCommodity] = useState<Commodity>(commodities[0]);
+
+  if (!commodities || commodities.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-center">
+        <div className="bg-muted/50 w-20 h-20 rounded-full flex items-center justify-center mb-4">
+          <PackageSearch className="w-10 h-10 text-muted-foreground/60" />
+        </div>
+        <h3 className="text-lg font-semibold text-foreground mb-1">Belum Ada Data Komoditas</h3>
+        <p className="text-muted-foreground text-sm max-w-md">
+          Data harga komoditas belum tersedia dari server. Silakan cek kembali nanti.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col md:grid md:grid-cols-3 gap-6 relative">
@@ -17,12 +32,12 @@ export function CommodityGrid({ commodities }: { commodities: Commodity[] }) {
             <PriceChart data={[...selectedCommodity.history, ...selectedCommodity.predicted]} />
             <div className="flex justify-between items-center mt-4 text-xs">
               <div className="flex items-center gap-1.5">
-                <div className="w-2 h-2 rounded-full bg-primary" />
-                <span className="text-muted-foreground">Histori</span>
+                <div className="w-3 h-0.5 rounded-full bg-primary" />
+                <span className="text-muted-foreground">Harga Aktual</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <div className="w-2 h-2 rounded-full border border-secondary" />
-                <span className="text-muted-foreground">Prediksi AI</span>
+                <div className="w-3 h-0.5 rounded-full border border-secondary border-dashed" />
+                <span className="text-muted-foreground">Prediksi AI (H+1 s/d H+7)</span>
               </div>
             </div>
           </div>
